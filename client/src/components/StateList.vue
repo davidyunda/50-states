@@ -1,7 +1,7 @@
 <template>
     <div class="state-list-container">
 
-        <!--display each state and chech if visited or not -->
+        <!--display each state and chech if visited or not  -->
         <div class="state-list" v-for="state in states" v-bind:key="state.name">
             <state-detail 
             v-bind:state="state"
