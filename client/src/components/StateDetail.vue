@@ -4,7 +4,7 @@
         {{ state.name }}
         </span>
         <div>
-            <input class="visit-state" type="checkbox" v-model="visited" v-on:change="visitedChanged">
+            <input class="visit-state" type="checkbox" v-model="visited" v-on:change="visitedChanged">  
         </div>
 
         <div>
@@ -25,9 +25,9 @@ export default {
     },
     data() {
         return {
-            visited: this.state.visited     // ok to modify data
+            visited: this.state.visited     // ok to modify data 
         }
-    },
+    }, 
     methods: {
         visitedChanged() {
             this.$emit('update-visited', this.state.name, this.visited)

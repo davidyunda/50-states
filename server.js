@@ -8,12 +8,12 @@ app.use(express.json())
 app.use('/api', states_api)
 
 app.use(function(req, res, next) {
-    res.status(404).send('Not found')
+    res.status(404).send('Not found')       // send a message to the user that there is a problem
 })
 
 app.use(function(err, req, res, next) {
     console.log(err)
-    res.status(500).send('Server error')
+    res.status(500).send('Server error')        // send message to the developer about server error
 })
 
 let server = app.listen(process.env.PORT || 3000, function() {

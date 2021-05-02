@@ -1,6 +1,7 @@
 <template>
     <div class="state-list-container">
 
+        <!--display each state and chech if visited or not -->
         <div class="state-list" v-for="state in states" v-bind:key="state.name">
             <state-detail 
             v-bind:state="state"
@@ -26,12 +27,12 @@ export default {
     },
     methods: {
         fetchAllStates() {
-            this.$stateService.getAllStates().then ( states => {
+            this.$stateService.getAllStates().then ( states => {        // get all the states
                 this.states = states
             })
         },
         updateVisited(stateName, visited) {
-            this.$stateService.setVisited(stateName, visited).then( () => {
+            this.$stateService.setVisited(stateName, visited).then( () => {     // get path and then update visited
                 this.fetchAllStates()
             })
         }

@@ -5,8 +5,9 @@
         <p v-if="state.visited">You have visited this state</p>
         <p v-else>You have not visited this state yet</p>
 
+        <!-- display leaflet map and getting info like lat, lon and zoom-->
         <div id="map-container">
-            <l-map v-bind:center="mapCenter" v-bind:zoom="state.zoom">
+            <l-map v-bind:center="mapCenter" v-bind:zoom="state.zoom">     
                 <l-tile-layer
                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                  attribution="&copy; OpenstreetMap contributors"
@@ -39,7 +40,7 @@ export default {
     methods: {
         fetchStateData() {
             this.$stateService.getOneState(this.state.name).then( state => {
-                this.state = state
+                this.state = state      // send info for state object from props
             })
         }
     }

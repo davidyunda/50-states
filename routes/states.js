@@ -3,6 +3,7 @@ let States = require('../models').States
 
 let router = express.Router()
 
+// get all states
 router.get('/states', function(req, res, next) {
     States.findAll({ order: ['name']}).then( states => {
         return res.json(states)
