@@ -6,8 +6,8 @@
         <p v-else>You have not visited this state yet</p>
 
         <!-- display leaflet map and getting info like lat, lon and zoom-->
-        <div id="map-container">
-            <l-map v-bind:center="mapCenter" v-bind:zoom="state.zoom">     
+        <div id="map-container" v-if="dataReady">
+            <l-map ref="map" v-on:ready="onMapReady" v-bind:center="mapCenter" v-bind:zoom="state.zoom">     
                 <l-tile-layer
                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                  attribution="&copy; OpenstreetMap contributors"
@@ -30,7 +30,9 @@ export default {
     },
     data() {
         return {
-            state: {}
+            state: {},
+            dataReady: false,
+            mapReady: false
         }
     },
     mounted() {
@@ -41,8 +43,34 @@ export default {
         fetchStateData() {
             this.$stateService.getOneState(this.state.name).then( state => {
                 this.state = state      // send info for state object from props
+                this.dataReady = true
+            }).catch( err => {
+                //404 not found
+                if ( err.response && err.response.status === 404 ) {
+                    // this.state.name = '?'
+
+                    // Programatically navigate to the Not Found page
+                    this.$router.push({ name: 'NotFound'})
+                }else {
+                    // 500 server error
+                    alert('Sorry, error fetching data about this state')        // general message for the user
+                    console.error(err)        // for the developer
+                }
             })
+        },
+        onMapReady() {
+            this.mapReady = true
+        },
+        setMapView() {
+            if (this.mapReady && this.dataReady) {
+                this.$refs.map.leafletObject.setMapView(this.mapCenter, this.mapZoom)        // check if the map and data is ready
+            }
         }
+    },
+    computed: {
+        mapCenter() {
+            return [this.state.lat, this.state.lon ]
+        }    
     }
 }
 </script>
