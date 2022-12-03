@@ -16,12 +16,6 @@
   },
   "devDependencies": {
     "sqlite3": "^5.0.2"
-  },
-  {
-  "name": "my-package",
-  "scripts": {
-    "build": "babel src -d lib",
-    "test": "jest"
   }
 }
 
