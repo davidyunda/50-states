@@ -4,8 +4,9 @@
   "description": "Have you visited all the states?",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d lib",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "David",
   "license": "ISC",
@@ -16,7 +17,10 @@
     "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0"
   }
 }
 
